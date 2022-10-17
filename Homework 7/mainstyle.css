@@ -1,0 +1,19 @@
+span{
+    color:blueviolet; 
+    font-family:'Courier New', Courier, monospace; 
+    font-size:20;
+    font-weight:bold;
+}
+
+.strawberry{
+    text-decoration:overline;
+    text-decoration-color:pink;
+    text-decoration-style:wavy;
+    }
+    
+#cherry{
+    text-decoration:overline;
+    text-decoration-color:crimson;
+    text-decoration-style:dotted;
+    text-decoration-thickness:8px;
+    }
