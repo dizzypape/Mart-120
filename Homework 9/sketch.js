@@ -35,6 +35,8 @@ function setup() {
     circle(170,140,25);
     fill(44, 42, 42);
     circle(170,140,12);
+    fill(165, 42, 42);
+    point(200,130);
 //glasses
     line(59,138,90,140);
     fill(162, 216, 233, 0.725);
