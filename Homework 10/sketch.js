@@ -1,4 +1,3 @@
-var movement = 0.05;
 //right eye var
 var x = 110;
 var y = 135;
@@ -9,17 +8,28 @@ var x2 = 170;
 var y2 = 140;
 var diameter2 = 25;
 var d3 = 12;
+var eyeMovement = 0.5;
 //ear var
 var ex1 = 59;
 var ey = 140;
 var ex2 = 221;
+var earMovement = 2.5;
 //lips var
 var Lx = 140;
 var Ly = 205;
+var lipsMovement = 1.5;
 //text var
 var lrgtxt = 33;
 var ovrsize = 12;
-
+var textMovement = 2;
+var count = 0;
+//head var
+var hw = 160;
+var hh = 215;
+var headSize = 1;
+//hair var
+var hrw = 120;
+var hrh = 74;
 
 
 
@@ -45,15 +55,28 @@ function setup()
     ellipse(ex2,ey,10,40);
     if (ey >= 165 || ey <= 125)
     {
-        movement *= -1;
+        earMovement *= -1;
     }
-    ey+= movement;
+    ey += earMovement;
 //head
     fill(229, 193, 177);
-    ellipse(140,140,160,215);
+    ellipse(140,140,hw,hh);
+    hw += headSize;
+    hh += headSize;
+    if (hw >= 170 && hh >= 225 || hw <= 150 && hw <= 205)
+    {
+        headSize *= -1;
+    }
+
 //hair
     fill(113, 96, 73);
-    ellipse(140,70,120,74);
+    ellipse(140,70,hrw,hrh);
+    hrw += headSize;
+    hrh += headSize;
+    if (hrh >= 130 && hrh >= 84 || hrw <= 110 && hrw <= 64)
+    {
+        headSize *= -1;
+    }
 //right eye
     fill(255, 255, 255);
     ellipse(110,140,40,80);
@@ -63,9 +86,9 @@ function setup()
     circle(x,y,d2);
     if (x >= 115 || x <= 105)
     {
-        movement *= -1;
+        eyeMovement *= -1;
     }
-    x += movement;
+    x += eyeMovement;
 //left eye
     fill(255, 255, 255);
     ellipse(170,140,40,25);
@@ -77,9 +100,9 @@ function setup()
     point(200,130);
     if (x2 >= 177.5 || x2 <= 162.5)
     {
-        movement *= -1;
+        eyeMovement *= -1;
     }
-    x2 += movement;
+    x2 += eyeMovement;
 //glasses
     line(59,138,90,140);
     fill(162, 216, 233, 0.725);
@@ -112,10 +135,10 @@ function setup()
     line(140,205,145,202);
     if (Lx >= 150 && Ly >= 213 || Lx <= 130 && Ly <= 193)
     {
-        movement *= -1;
+        lipsMovement *= -1;
     }
-    Lx += movement;
-    Ly += movement;
+    Lx += lipsMovement;
+    Ly += lipsMovement;
 //title
 
     fill(0,0,0);
@@ -127,10 +150,14 @@ function setup()
     text('Perception',62,494)
     textSize(10);
     text('Isabelle Pape',235,485);
-    if (lrgtxt >= 40 && ovrsize >= 20 || lrgtxt <= 25 && ovrsize <= 5)
+    lrgtxt += textMovement;
+    ovrsize += textMovement;
+    count++;
+    if (count > 5)
     {
-        movement *=-1;
+        textMovement *= -1;
+        count = 0;
     }
-    lrgtxt += movement;
-    ovrsize += movement;
+
+
   }
