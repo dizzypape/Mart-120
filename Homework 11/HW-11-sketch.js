@@ -42,12 +42,12 @@ function draw()
     fill(225);
     rect(0,0,width,10);
     rect(0,0,10,height);
-    rect(0,height-10,width,10);
-    rect(width-10,50,10,height-50);
+    rect(0,590,400,10);
+    rect(390,50,10,550);
 
     textSize(18);
     fill(0);
-    text("Escape", width-75,height-565);
+    text("Escape", 325,35);
     
     fill(33, 36, 196);
     triangle(triangleX1,triangleY1,triangleX2,triangleY2,triangleX3,triangleY3);
@@ -85,13 +85,13 @@ function draw()
 
     circY += circYspeed;
 
-    if(circY > height)
+    if(circY > 600)
     {
         circY = 20;
     }
     if(circY < 20)
     {
-        circY = height;
+        circY = 600;
     }
 
     fill(225, 169, 4);
@@ -103,12 +103,12 @@ function draw()
     }
     x += movement;
 
-    if(triangleX2 > width && triangleY2 > width-400)
+    if(triangleX2 > 400 && triangleY2 > 0)
     {
         fill(0);
         stroke(4);
         textSize(32);
-        text("Good job, you made it!", width/2-150, height/2);
+        text("Good job, you made it!", 50, 300);
     }
 
     fill(19, 136, 19);
