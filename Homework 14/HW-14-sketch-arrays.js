@@ -15,13 +15,26 @@ var d = 68;
 // circle var
 var circX = 200;
 var circY = 550;
-var circXspeed;
-var circYspeed;
+
+var circleXs = [];
+var circleYs = [];
+var circleDia = [];
+
+var circXspeed = [];
+var circYspeed = [];
+
+
 
 //square var
 var x = 60;
 var y = 200;
-var movement = Math.floor(Math.random() * (Math.floor(Math.random() * 6)) + 1);;
+
+var squareXmovement = Math.floor(Math.random() * (Math.floor(Math.random() * 6)) + 1);
+var squareXs = [];
+var squareYs = [];
+var squareLeng = [];
+var squareXspeed = [];
+var squareYspeed = [];
 
 // mouse click shape
 var mouseEllipseX;
@@ -31,8 +44,24 @@ var mouseEllipseY;
 function setup()
 {
     createCanvas(400, 600);
-    circXspeed = Math.floor(Math.random() * (Math.floor(Math.random() *6)) + 1);
-    circYspeed = Math.floor(Math.random() * (Math.floor (Math.random() * 6)) + 1);
+//circle obstacles
+    for (var i = 0; i < 4; i++)
+    {
+        circXspeed[i] = Math.floor(Math.random() * (Math.floor(Math.random() * 6)) + 1);
+        circYspeed[i] = Math.floor(Math.random() * (Math.floor (Math.random() * 6)) + 1);
+        circleXs[i] = getRandomNumber (400);
+        circleYs[i] = getRandomNumber (600);
+        circleDia[i] = getRandomNumber (24); 
+    }
+//square obstacles
+    for (var s = 0; s < 1; s++)
+    {
+        squareXspeed[s] = Math.floor(Math.random() * (Math.floor(Math.random() * 6)) + 1);
+        squareYspeed[s] = Math.floor(Math.random() * (Math.floor(Math.random() * 6)) + 1);
+        squareXs[s] = getRandomNumber (400);
+        squareYs[s] = getRandomNumber (600);
+        squareLeng[s] = getRandomNumber (24);
+    }
 }
 
 function draw()
@@ -48,11 +77,41 @@ function draw()
     //call mouse click shape function
     ellipseMouseclick();
 
-    //call create obstacles function
-    createObstacles();
+    fill(240, 23, 150);
 
-    //call obstacle movement function
-    obstacleMovement();
+for (var i = 0; i < circleXs.length; i++)
+    {
+        circle(circleXs[i], circleYs[i], circleDia[i]);
+        circXspeed[i] = Math.floor(Math.random() * (Math.floor(Math.random() * 6)) + 1);
+        circYspeed[i] = Math.floor(Math.random() * (Math.floor(Math.random() * 6)) + 1);
+
+        circleYs[i] += circYspeed[i];
+
+        if(circleYs[i] > 600)
+        {
+            circleYs[i] = 20;
+        }
+        if(circleYs[i] < 20)
+        {
+            circleYs[i] = 600;
+        }
+    }
+
+    fill(140,20,244);
+
+for (var s = 0; s < squareXs.length; s++)
+{
+    square(squareXs[s], squareYs[s], squareLeng[s]);
+    squareXspeed[s] = Math.floor(Math.random() * (Math.floor(Math.random() * 6)) + 1);
+    squareYspeed[s] = Math.floor(Math.random() * (Math.floor(Math.random() * 6)) + 1);
+
+    if(squareXs[s] >= 370 || squareXs[s] <= 10)
+        {
+            squareXmovement *= -1;
+        }
+
+        squareXs[s] += squareXmovement;
+}
 
     //call create boarders function
     createBoarders();
@@ -112,41 +171,6 @@ function mouseClicked()
         mouseEllipseY = mouseY;
     }
 
-//create obstacles function
-function createObstacles()
-    {
-        fill(240, 23, 150);
-        circle(circX,circY, 45);
-    
-        fill(225, 169, 4);
-        square(x,y,20);
-    }
-
-//obstacle movement function
-function obstacleMovement()
-    {
-        //circle movement
-        circXspeed = Math.floor(Math.random() * (Math.floor(Math.random() * 6)) + 1);
-        circYspeed = Math.floor(Math.random() * (Math.floor(Math.random() * 6)) + 1);
-    
-        circY += circYspeed;
-    
-        if(circY > 600)
-        {
-            circY = 20;
-        }
-        if(circY < 20)
-        {
-            circY = 600;
-        }
-        //square movement
-        if(x >= 370 || x <= 10)
-        {
-            movement *= -1;
-        }
-        x += movement;
-    }
-
 //create boarders function
 function createBoarders()
     {
@@ -159,13 +183,14 @@ function createBoarders()
         rect(0, 0, 10, 600);
         //bottom rect
         rect(0, 590, 400, 10);
+        //right rect
+        rect(390, 50, 10, 550);
     }
 
 //create exit function
 function createExit()
     {
         //right rect
-        rect(390, 50, 10, 550);
         textSize(18);
         fill(0);
         text("Escape", 325, 35);
@@ -182,3 +207,9 @@ function winningText()
             text("Good job, you made it!", 50, 300);
         }
     }
+
+//Random # function
+function getRandomNumber(number)
+{
+    return Math.floor(Math.random() * number) + 12;
+}
